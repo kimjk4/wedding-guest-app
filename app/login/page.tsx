@@ -1,9 +1,9 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
@@ -46,7 +46,7 @@ export default function LoginPage() {
         const { error } = await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken })
         if (error) authError = error.message
       } else if (code) {
-        const { error } = await supabase.auth.exchangeCodeForSession({ code })
+        const { error } = await supabase.auth.exchangeCodeForSession(code)
         if (error) authError = error.message
       }
 
@@ -122,5 +122,13 @@ export default function LoginPage() {
       {sent && !authProcessing && <p className="text-sm text-espresso-500">Access link sent. Please check your inbox.</p>}
       {error && <p className="text-sm text-red-600">{error}</p>}
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="space-y-4 text-center text-sm text-espresso-500">Preparing sign-in…</div>}>
+      <LoginForm />
+    </Suspense>
   )
 }
