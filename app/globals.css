@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body { height: 100%; }
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 15%, rgba(198, 174, 145, 0.18), transparent 55%),
+    radial-gradient(circle at 88% 12%, rgba(138, 117, 94, 0.18), transparent 45%),
+    linear-gradient(180deg, #fdfcf9 0%, #f7f2ea 45%, #efe5d4 100%);
+}
+
+@layer base {
+  body {
+    @apply font-body text-espresso-600 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-heading text-espresso-800;
+  }
+  a {
+    @apply text-espresso-600 transition-colors hover:text-espresso-500;
+  }
+}
+
+@layer components {
+  .surface {
+    @apply rounded-4xl border border-taupe-100/80 bg-white/95 p-8 shadow-ring backdrop-blur-sm;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-espresso-700 px-5 py-2.5 text-sm font-medium text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-espresso-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-300/60;
+  }
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-taupe-100 bg-white/70 px-5 py-2.5 text-sm font-medium text-espresso-600 shadow-sm transition hover:-translate-y-0.5 hover:border-bronze-300 hover:text-espresso-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-300/60;
+  }
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-bronze-300 bg-ivory-100/80 px-4 py-1 text-xs uppercase tracking-[0.28em] text-coal-400;
+  }
+  .form-field {
+    @apply w-full rounded-2xl border border-taupe-100 bg-white px-4 py-3 text-sm text-espresso-600 shadow-sm transition focus:border-bronze-300 focus:outline-none focus:ring-2 focus:ring-bronze-300/70;
+  }
+  .input-label {
+    @apply text-xs font-medium uppercase tracking-[0.25em] text-coal-400;
+  }
+}
